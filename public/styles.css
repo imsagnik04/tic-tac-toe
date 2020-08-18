@@ -1,0 +1,386 @@
+:root   {
+    background-color: #ecf5ff;
+    --cell-size: 80px;
+    --mark-size: calc(var(--cell-size) * 0.9);
+    font-size: 62.5%;
+}
+
+*, *::after, *::before  {
+    box-sizing: border-box;
+}
+
+body    {
+    margin: 0;
+}
+
+h1  {
+    font-size: 5.4rem;
+    color: #56a5eb;
+    margin-bottom: 1rem;
+}
+
+h1 > span  {
+    font-size: 2.4rem;
+    font-weight: 500;
+}
+
+h2  {
+    font-size: 4.2rem;
+    margin-bottom: 4rem;
+    font-weight: 700;
+    color: #59b2ff;
+}
+
+h3  {
+    font-size: 2.8rem;
+    font-weight: 500;
+    color: #60b1f7;
+}
+
+.container  {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 80rem;
+    max-height: 100rem;
+    margin: 0 auto;
+    padding: 2rem;
+    flex-direction: column;
+}
+
+.title  {
+    margin-bottom: 0.1rem;
+    padding-bottom: 0;
+    margin-top: 1px;
+    font-size: 4.3rem;
+}
+
+.score  {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 3.5rem;
+    
+}
+
+.players    {
+    display: inline-flex;
+    height: 4.5rem;
+}
+
+.player-X   {
+    margin-right: 6.5rem;
+}
+
+.player-O   {
+    margin-left: 6.5rem;
+}
+
+.scoreX {
+    margin: 0 11rem 1rem 0rem;
+}
+
+.scoreO {
+    margin: 0 0rem 1rem 11rem;
+}
+
+.player-X,
+.player-O,
+.scoreX,
+.scoreO {
+    font-size: 2rem;
+}
+
+.board  {
+    width: calc(var(--cell-size) * 4);
+    height: calc(var(--cell-size) * 5);
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(3,auto);
+    border: 3px solid white;
+    background-color: rgba(86,165,235,0.5);
+    border-radius: 20px;
+}
+
+.pin    {
+    border: 3px solid white;
+    background-color: rgba(86,165,235,0.5);
+    width: 150px;
+    height: 50px;
+    border-top-left-radius: 110px;
+    border-top-right-radius: 110px;
+    border-bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+}
+
+.cell   {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border: 3px solid #ecf5ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3)  {
+    border-top: none;
+}
+
+.cell:nth-child(3n+1)   {
+    border-left: none;
+}
+
+.cell:nth-child(3n+3)   {
+    border-right: none;
+}
+
+.cell:last-child,
+.cell:nth-child(7),
+.cell:nth-child(8)  {
+    border-bottom: none;
+}
+
+
+
+.cell.x,
+.cell.o {
+    cursor: not-allowed;
+}
+
+
+/* x */
+
+.cell.x::before,
+.cell.x::after  {
+    background-color: rgb(86, 145, 255);
+}
+
+
+.board.x .cell:not(.x):not(.o):hover::before,
+.board.x .cell:not(.x):not(.o):hover::after    {
+    background-color: #e2efff;
+}
+
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.o):hover::after,
+.board.x .cell:not(.x):not(.o):hover::before  {
+    content: '';
+    position: absolute;
+    width: calc(var(--mark-size) * .15);
+    height: var(--mark-size);
+}
+
+.cell.x::before,
+.board.x .cell:not(.x):not(.o):hover::before {
+    transform: rotate(45deg);
+}
+
+.cell.x::after,
+.board.x .cell:not(.x):not(.o):hover::after  {
+    transform: rotate(-45deg);
+}
+
+/* o */
+
+.cell.o::before  {
+    background-color: white;
+}
+
+
+.board.o .cell:not(.x):not(.o):hover::before   {
+    background-color: #e2efff;
+}
+
+.cell.o::before,
+.cell.o::after,
+.board.o .cell:not(.x):not(.o):hover::after,
+.board.o .cell:not(.x):not(.o):hover::before  {
+    content: '';
+    position: absolute;
+    border-radius: 50%;   
+}
+
+.cell.o::before,
+.board.o .cell:not(.x):not(.o):hover::before  {
+    width: var(--mark-size);
+    height: var(--mark-size);
+}
+
+.cell.o::after,
+.board.o .cell:not(.x):not(.o):hover::after  {
+    width: calc(var(--mark-size) * 0.7);
+    height: calc(var(--mark-size) * 0.7);
+    background-color: rgba(86, 165, 235, 0.5);
+}
+
+
+/* winning-message */
+
+.winning-message    {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 5rem;
+    flex-direction: column;
+}
+
+.winning-message button {
+    font-size: 3rem;
+    background-color: white;
+    border: 3px solid black;
+    padding: 0.25em 0.5em;
+    cursor: pointer;
+    margin-top: 3rem;
+    border-radius: 20px;
+    outline: none;
+}
+
+.winning-message button:hover   {
+    background-color: black;
+    color: white;
+    border-color: white;
+}
+
+.winning-message.show   {
+    display: flex;
+}
+
+/* BUTTONS */
+
+.btn    {
+    font-size: 1.8rem;
+    padding: 1rem 0;
+    width: 20rem;
+    text-align: center;
+    border: 0.1rem solid #56a5eb;
+    margin-bottom: 1rem;
+    text-decoration: none;
+    color: #56a5eb;
+    background-color: white;
+    border-radius: 20px;
+    outline: none;
+}
+
+.btn:hover  {
+    cursor: pointer;
+    box-shadow: 0 0.4rem 1.4rem 0 rgba(86,185, 235, 0.5);
+    transform: translateY(-0.1rem);
+    transition: transform 150ms;
+}
+
+.btn[disabled]:hover    {
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+/* FORMS */
+
+form    {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+}
+
+#RoomId, #username   {
+    margin-bottom: 1rem;
+    width: 20rem;
+    padding: 1.5rem;
+    font-size: 1.8rem;
+    box-shadow: 0 0.1rem 1.4rem 0 rgba(86,185, 235, 0.5);
+    border: 0.5rem transparent;
+    border-radius: 20px;
+    text-align: center;
+    outline: none;
+}
+
+#RoomId::placeholder  {
+    color: #aaa;
+    text-align: center;
+}
+
+#username::placeholder  {
+    color: #aaa;
+    text-align: center;
+}
+.info, 
+.Id  {
+    padding-bottom: 2rem;
+    font-size: 2.5rem;
+    color: #88c7ff;
+}
+
+.flex-column    {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-center    {
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.round   {
+    font-size: 2.5rem;
+    color: #88c7ff;
+}
+
+.btn-room    {
+    font-size: 1.7rem;
+    padding-top: 0.5rem;
+    padding-left: 0.5rem;
+    padding-bottom: 0.5rem;
+    max-width: 20rem;
+    outline: none;
+    text-align: center;
+    border: 0.1rem solid #56a5eb;
+    margin-bottom: 1rem;
+    text-decoration: none;
+    color: #56a5eb;
+    background-color: white;
+}
+
+
+.btn-room:hover  {
+    cursor: pointer;
+    box-shadow: 0 0.4rem 1.4rem 0 rgba(86,185, 235, 0.5);
+}
+
+.roomdiv {
+    height: 50px;
+}
+
+.vs{
+    padding: 0;
+    margin: 0;
+}
+
+#playerX, #playerO  {
+    margin-bottom: 2rem;
+}
+
+option:hover    {
+    cursor: pointer;
+}

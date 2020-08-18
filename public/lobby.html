@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe-Lobby</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="flex-center flex-column">
+            <h1>Tic-Tac-Toe</h1>
+            <div class="roomdiv">
+                <p class="Id" id="Id">Room-Id: </p>
+            </div>
+            <p class="round">Number of Rounds</p>
+            <select
+                class="btn-room"
+                id="Rounds"
+                onchange="roundSelect()"
+            >
+                <option value="0">Select No. of Rounds</option>
+                <option value="1">1</option>
+                <option value="2">3</option>
+                <option value="3">5</option>
+                <option value="4">7</option>
+                <option value="5">9</option>
+
+            </select>
+            <div id="playerInfo" class="flex-center flex-column">
+                <h3 id="playerX">Player X</h3>
+                <h2 class="vs">VS</h2>
+                <h3 id="playerO">Player O</h3>
+            </div>             
+            <div class="buttonContainer">
+                    <button
+                class="btn"
+                id="stratGame"
+                onclick="startGame(event)"
+                disabled
+                >
+                    Start Game
+                </button>
+
+                <button
+                class="btn"
+                id="exitLobby"
+                onclick="exitLobby(event)"
+                >
+                    Exit Lobby
+                </button>
+                </div>
+        </div> 
+    </div>
+    <script src="lobby.js"></script>    
+</body>
+</html>
