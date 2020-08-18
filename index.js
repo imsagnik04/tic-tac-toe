@@ -13,5 +13,8 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/login.html');
 });
 
+app.get('/roomid/:roomid', (req,res) => {
+	res.sendFile(__dirname + '/public/lobby.html');
+});
 
 server.listen(5000);

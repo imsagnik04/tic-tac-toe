@@ -14,7 +14,13 @@ enterRoom = (e) =>  {
 
 function createroom(e){
     e.preventDefault();
-    window.location.assign('/lobby.html');
+	//window.location.assign("/roomid/");
+	//
+    //var xmlHttp = new XMLHttpRequest();
+    //xmlHttp.open( "GET", 'http://13.126.42.186:5000/roomid/', false ); // false for synchronous request
+    //xmlHttp.send( null );
+    //return xmlHttp.responseText;
+   window.location.href = `/roomid/${localStorage.getItem('RoomId')}`;
 }
 
 logout = (e) => {
